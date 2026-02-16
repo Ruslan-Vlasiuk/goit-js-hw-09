@@ -25,7 +25,7 @@ function loadFormData() {
 
 function onFormInput(event) {
   const fieldName = event.target.name;
-  const fieldValue = event.target.value.trim();
+  const fieldValue = event.target.value;
   
   formData[fieldName] = fieldValue;
   
@@ -35,15 +35,12 @@ function onFormInput(event) {
 function onFormSubmit(event) {
   event.preventDefault();
   
-  const email = form.elements.email.value.trim();
-  const message = form.elements.message.value.trim();
-  
-  if (!email || !message) {
+  if (!formData.email || !formData.message) {
     alert('Fill please all fields');
     return;
   }
   
-  console.log({ email, message });
+  console.log(formData);
   
   localStorage.removeItem(STORAGE_KEY);
   
@@ -53,7 +50,7 @@ function onFormSubmit(event) {
   form.reset();
 }
 
+loadFormData();
+
 form.addEventListener('input', onFormInput);
 form.addEventListener('submit', onFormSubmit);
-
-loadFormData();
